@@ -1,7 +1,10 @@
+from lexic import I
+import productions
+
 class syntaxAnalysis():
     def __init__(self):
         self.stack = []
-        self.stack.append("OL")
+        self.stack.append(productions.Production1("OL"))
         self.i=0
 
     def loop(self, sequence):
@@ -17,7 +20,7 @@ class syntaxAnalysis():
             else:
                 top = ''
 
-            if element == 'I':
+            if isinstance(element, I):
                 if top == ")":
                     break
                 elif top == "P":

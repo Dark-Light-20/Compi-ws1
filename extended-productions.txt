@@ -1,0 +1,104 @@
+class P():
+    def __init__(self, s1):
+        self.s1 = s1
+
+class F_L():
+    def __init__(self, h1, s1):
+        self.h1 = h1
+        self.s1 = s1
+
+class F():
+    def __init__(self, s1):
+        self.s1 = s1
+
+class T_L():
+    def __init__(self, h1, s1):
+        self.h1 = h1
+        self.s1 = s1
+
+class T():
+    def __init__(self, s1):
+        self.s1 = s1
+
+class E_L():
+    def __init__(self, h1, s1):
+        self.h1 = h1
+        self.s1 = s1
+
+class E():
+    def __init__(self, s1):
+        self.s1 = s1
+
+class OR():
+    def __init__(self, s1):
+        # s1 -> char ['<','>','<=',...]
+        self.s1 = s1
+
+class ER_L():
+    def __init__(self, h1, s1):
+        self.h1 = h1
+        self.s1 = s1
+
+class ER():
+    def __init__(self, s1):
+        self.s1 = s1
+
+class OL2_L():
+    def __init__(self, h1, s1):
+        self.h1 = h1
+        self.s1 = s1
+
+class EL1():
+    def __init__(self, s1):
+        self.s1 = s1
+
+class OL_L():
+    def __init__(self, h1, s1):
+        self.h1 = h1
+        self.s1 = s1
+
+class OL():
+    def __init__(self, s1):
+        self.s1 = s1
+
+class logOr():
+    def __init__(self, h1, s2, s3):
+        self.h1 = h1
+        self.s2 = s2
+        self.s3 = s3
+
+class logAnd():
+    def __init__(self, h1, s2, s3):
+        self.h1 = h1
+        self.s2 = s2
+        self.s3 = s3
+
+class Sum():
+    def __init__(self, h1, s2, s3):
+        self.h1 = h1
+        self.s2 = s2
+        self.s3 = s3
+
+class Less():
+    def __init__(self, h1, s2, s3):
+        self.h1 = h1
+        self.s2 = s2
+        self.s3 = s3
+
+class Mul():
+    def __init__(self, h1, s2, s3):
+        self.h1 = h1
+        self.s2 = s2
+        self.s3 = s3
+
+class Div():
+    def __init__(self, h1, s2, s3):
+        self.h1 = h1
+        self.s2 = s2
+        self.s3 = s3
+
+class Pot():
+    def __init__(self, h1, s2, s3):
+        self.h1 = h1
+        self.s2 = s2
+        self.s3 = s3
