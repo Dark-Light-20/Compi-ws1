@@ -1,5 +1,5 @@
 def lexicAnalysis(sequence):
-    operators=['+','-','*','/','^','(',')','&','|','<','>','<=','>=','!','=']
+    operators=['+','-','*','/','^','(',')','&','|','<','>','!','=']
     lexicSequence=[]
     available=False     # available -> to push an "I"
     
@@ -10,10 +10,29 @@ def lexicAnalysis(sequence):
             if available:
                 lexicSequence.append("I")
                 available=False
+            if char == '<':
+                if pos < len(sequence)-1 and sequence[pos+1] == '=':
+                    lexicSequence.append("<=")
+                    continue
+            elif char == '>':
+                if pos < len(sequence)-1 and sequence[pos+1] == '=':
+                    lexicSequence.append(">=")
+                    continue
+            elif char == '!':
+                if pos < len(sequence)-1 and sequence[pos+1] == '=':
+                    lexicSequence.append("!=")
+                    continue
+                else:
+                    return error(pos, char)
+            elif char == '=':
+                if pos < len(sequence)-1 and sequence[pos+1] == '=':
+                    lexicSequence.append("==")
+                    continue
+                else:
+                    continue        
             lexicSequence.append(char)
         else:
-            print("Error! Extrange Character found at "+str(pos)+": "+char)
-            return None
+            return error(pos, char)
 
     if available:   # validation if last element in sequence is "I"
         lexicSequence.append("I")
@@ -22,3 +41,6 @@ def lexicAnalysis(sequence):
     
     return lexicSequence
 
+def error(pos, char):
+    print("Lexic Error!!! Extrange Character found at "+str(pos)+": "+char)
+    return None

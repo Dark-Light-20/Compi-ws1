@@ -48,7 +48,7 @@ class syntaxAnalysis():
                     break
                 elif top == "OL":
                     self.nine()
-                elif len(self.stack) == 0:
+                elif top == '':
                     break
             elif element == '+':
                 if top == ")":
@@ -81,7 +81,7 @@ class syntaxAnalysis():
                     break
                 elif top == "OL":
                     break
-                elif len(self.stack) == 0:
+                elif top == '':
                     break
             elif element == '-':
                 if top == ")":
@@ -114,7 +114,7 @@ class syntaxAnalysis():
                     break
                 elif top == "OL":
                     break
-                elif len(self.stack) == 0:
+                elif top == '':
                     break
             elif element == '*':
                 if top == ")":
@@ -147,7 +147,7 @@ class syntaxAnalysis():
                     break
                 elif top == "OL":
                     break
-                elif len(self.stack) == 0:
+                elif top == '':
                     break
             elif element == '/':
                 if top == ")":
@@ -180,7 +180,7 @@ class syntaxAnalysis():
                     break
                 elif top == "OL":
                     break
-                elif len(self.stack) == 0:
+                elif top == '':
                     break
             elif element == '^':
                 if top == ")":
@@ -213,7 +213,7 @@ class syntaxAnalysis():
                     break
                 elif top == "OL":
                     break
-                elif len(self.stack) == 0:
+                elif top == '':
                     break
             elif element == '(':
                 if top == ")":
@@ -246,7 +246,7 @@ class syntaxAnalysis():
                     break
                 elif top == "OL":
                     self.nine()
-                elif len(self.stack) == 0:
+                elif top == '':
                     break
             elif element == ')':
                 if top == ")":
@@ -279,7 +279,7 @@ class syntaxAnalysis():
                     self.three()
                 elif top == "OL":
                     break
-                elif len(self.stack) == 0:
+                elif top == '':
                     break
             elif element == '&':
                 if top == ")":
@@ -312,7 +312,7 @@ class syntaxAnalysis():
                     break
                 elif top == "OL":
                     break
-                elif len(self.stack) == 0:
+                elif top == '':
                     break
             elif element == '|':
                 if top == ")":
@@ -345,7 +345,7 @@ class syntaxAnalysis():
                     self.ten()
                 elif top == "OL":
                     break
-                elif len(self.stack) == 0:
+                elif top == '':
                     break
             elif element == '<':
                 if top == ")":
@@ -378,7 +378,7 @@ class syntaxAnalysis():
                     break
                 elif top == "OL":
                     break
-                elif len(self.stack) == 0:
+                elif top == '':
                     break
             elif element == '>':
                 if top == ")":
@@ -411,7 +411,7 @@ class syntaxAnalysis():
                     break
                 elif top == "OL":
                     break
-                elif len(self.stack) == 0:
+                elif top == '':
                     break
             elif element == '<=':
                 if top == ")":
@@ -444,7 +444,7 @@ class syntaxAnalysis():
                     break
                 elif top == "OL":
                     break
-                elif len(self.stack) == 0:
+                elif top == '':
                     break
             elif element == '>=':
                 if top == ")":
@@ -477,9 +477,9 @@ class syntaxAnalysis():
                     break
                 elif top == "OL":
                     break
-                elif len(self.stack) == 0:
+                elif top == '':
                     break
-            elif element == '!':
+            elif element == '!=':
                 if top == ")":
                     break
                 elif top == "P":
@@ -510,7 +510,7 @@ class syntaxAnalysis():
                     break
                 elif top == "OL":
                     break
-                elif len(self.stack) == 0:
+                elif top == '':
                     break
             elif element == '=':
                 if top == ")":
@@ -543,7 +543,7 @@ class syntaxAnalysis():
                     break
                 elif top == "OL":
                     break
-                elif len(self.stack) == 0:
+                elif top == '':
                     break
             elif element == '$':
                 if top == ")":
@@ -576,10 +576,12 @@ class syntaxAnalysis():
                     self.three()
                 elif top == "OL":
                     break
-                elif len(self.stack) == 0:
-                    return "sequence Accepted!!!"
+                elif top == '':
+                    return "Sequence Accepted!!!"
+        
             self.i+=1
-        return "Sequence Error!!! It was expected ' "+top+" ' and it arrived ' "+element+" ', at position: "+str(self.i)
+        
+        return self.error(top, element)
             
     def one(self):
         self.stack.pop()
@@ -657,3 +659,53 @@ class syntaxAnalysis():
         self.stack.append("OR")
         self.i-=1
     
+    def error(self, top, element):
+        if top == ')':
+            return "Syntax Error!!! closing parenthesis expected but ' "+element+" ' arrived at position: "+str(self.i)
+        
+        elif top == 'P':
+            return "Syntax Error!!! identifier or opening parenthesis expected but ' "+element+" ' arrived at position: "+str(self.i)
+        
+        elif top == 'F_L':
+            return "Syntax Error!!! operator, closing parenthesis or end of string expected but ' "+element+" ' arrived at position: "+str(self.i)
+
+        elif top == 'F':
+            return "Syntax Error!!! identifier or opening parenthesis expected but ' "+element+" ' arrived at position: "+str(self.i)
+
+        elif top == 'T_L':
+            return "Syntax Error!!! operators (+,-,*,/,&,|,<,>,=,<=,>=,!=,==), closing parenthesis or end of string expected but ' "+element+" ' arrived at position: "+str(self.i)
+
+        elif top == 'T':
+            return "Syntax Error!!! identifier or opening parenthesis expected but ' "+element+" ' arrived at position: "+str(self.i)
+        
+        elif top == 'E_L':
+            return "Syntax Error!!! operators (+,-,&,|,<,>,=,<=,>=,!=,==), closing parenthesis expected or end of string expected  but ' "+element+" ' arrived at position: "+str(self.i)
+
+        elif top == 'T':
+            return "Syntax Error!!! identifier or opening parenthesis expected but ' "+element+" ' arrived at position: "+str(self.i)
+
+        elif top == 'OR':
+            return "Syntax Error!!! comparison operator expected but ' "+element+" ' arrived at position: "+str(self.i)
+        
+        elif top == 'ER_L':
+            return "Syntax Error!!! closing parenthesis, logical/comparison operator or end of string expected but ' "+element+" ' arrived at position: "+str(self.i)
+
+        elif top == 'ER':
+            return "Syntax Error!!! identifier or opening parenthesis expected but ' "+element+" ' arrived at position: "+str(self.i)
+
+        elif top == 'OL2_L':
+            return "Syntax Error!!! logical operator, closing parenthesis or end of string expected but ' "+element+" ' arrived at position: "+str(self.i)
+        
+        elif top == 'EL1':
+            return "Syntax Error!!! identifier or opening parenthesis expected but ' "+element+" ' arrived at position: "+str(self.i)
+
+        elif top == 'OL_L':
+            return "Syntax Error!!!  closing parenthesis, | operator or end of string expected but ' "+element+" ' arrived at position: "+str(self.i)  
+        
+        elif top == 'OL':
+            return "Syntax Error!!! identifier or opening parenthesis expected but ' "+element+" ' arrived at position: "+str(self.i)
+        
+        elif top == '':
+            return "Syntax Error!!! end of sequence expected but ' "+element+" ' arrived at position: "+str(self.i)
+
+        #return "Syntax Error!!! It was expected ' "+top+" ' and it arrived ' "+element+" ', at position: "+str(self.i)
