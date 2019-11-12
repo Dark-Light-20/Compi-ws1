@@ -1,8 +1,8 @@
 from lexic import lexicAnalysis
 from syntax import syntaxAnalysis
 
-expression="25^(8*2)-98/(45+5)-7"
-#expression=input("Type a arithmetic expression: ")
+expression="(25*8/7^(8-9)+5)<(85)&8+(45/8)!8"
+#expression=input("Type a logic-arithmetic expression: ")
 result=lexicAnalysis(expression)
 if result is not None:
     print(expression)
@@ -10,5 +10,5 @@ if result is not None:
     print(result)
     print("----------------")
     analysis=syntaxAnalysis()
-    print(analysis.cycle(result))
+    print(analysis.loop(result))
     

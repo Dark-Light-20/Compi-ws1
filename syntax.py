@@ -1,10 +1,10 @@
 class syntaxAnalysis():
     def __init__(self):
         self.stack = []
-        self.stack.append("E")
+        self.stack.append("OL")
         self.i=0
 
-    def cycle(self, sequence):
+    def loop(self, sequence):
         while(self.i<len(sequence)):
             """
             it must be another way fck XD
@@ -34,6 +34,20 @@ class syntaxAnalysis():
                     break
                 elif top == "E":
                     self.one()
+                elif top == "OR":
+                    break
+                elif top == "ER_L":
+                    break
+                elif top == "ER":
+                    self.thirteen()
+                elif top == "OL2_L":
+                    break
+                elif top == "EL1":
+                    self.eleven()
+                elif top == "OL_L":
+                    break
+                elif top == "OL":
+                    self.nine()
                 elif len(self.stack) == 0:
                     break
             elif element == '+':
@@ -52,6 +66,20 @@ class syntaxAnalysis():
                 elif top == "E_L":
                     self.two()
                 elif top == "E":
+                    break
+                elif top == "OR":
+                    break
+                elif top == "ER_L":
+                    break
+                elif top == "ER":
+                    break
+                elif top == "OL2_L":
+                    break
+                elif top == "EL1":
+                    break
+                elif top == "OL_L":
+                    break
+                elif top == "OL":
                     break
                 elif len(self.stack) == 0:
                     break
@@ -72,6 +100,20 @@ class syntaxAnalysis():
                     self.two()
                 elif top == "E":
                     break
+                elif top == "OR":
+                    break
+                elif top == "ER_L":
+                    break
+                elif top == "ER":
+                    break
+                elif top == "OL2_L":
+                    break
+                elif top == "EL1":
+                    break
+                elif top == "OL_L":
+                    break
+                elif top == "OL":
+                    break
                 elif len(self.stack) == 0:
                     break
             elif element == '*':
@@ -90,6 +132,20 @@ class syntaxAnalysis():
                 elif top == "E_L":
                     break
                 elif top == "E":
+                    break
+                elif top == "OR":
+                    break
+                elif top == "ER_L":
+                    break
+                elif top == "ER":
+                    break
+                elif top == "OL2_L":
+                    break
+                elif top == "EL1":
+                    break
+                elif top == "OL_L":
+                    break
+                elif top == "OL":
                     break
                 elif len(self.stack) == 0:
                     break
@@ -110,6 +166,20 @@ class syntaxAnalysis():
                     break
                 elif top == "E":
                     break
+                elif top == "OR":
+                    break
+                elif top == "ER_L":
+                    break
+                elif top == "ER":
+                    break
+                elif top == "OL2_L":
+                    break
+                elif top == "EL1":
+                    break
+                elif top == "OL_L":
+                    break
+                elif top == "OL":
+                    break
                 elif len(self.stack) == 0:
                     break
             elif element == '^':
@@ -128,6 +198,20 @@ class syntaxAnalysis():
                 elif top == "E_L":
                     break
                 elif top == "E":
+                    break
+                elif top == "OR":
+                    break
+                elif top == "ER_L":
+                    break
+                elif top == "ER":
+                    break
+                elif top == "OL2_L":
+                    break
+                elif top == "EL1":
+                    break
+                elif top == "OL_L":
+                    break
+                elif top == "OL":
                     break
                 elif len(self.stack) == 0:
                     break
@@ -148,6 +232,20 @@ class syntaxAnalysis():
                     break
                 elif top == "E":
                     self.one()
+                elif top == "OR":
+                    break
+                elif top == "ER_L":
+                    break
+                elif top == "ER":
+                    self.thirteen()
+                elif top == "OL2_L":
+                    break
+                elif top == "EL1":
+                    self.eleven()
+                elif top == "OL_L":
+                    break
+                elif top == "OL":
+                    self.nine()
                 elif len(self.stack) == 0:
                     break
             elif element == ')':
@@ -166,6 +264,284 @@ class syntaxAnalysis():
                 elif top == "E_L":
                     self.three()
                 elif top == "E":
+                    break
+                elif top == "OR":
+                    break
+                elif top == "ER_L":
+                    self.three()
+                elif top == "ER":
+                    break
+                elif top == "OL2_L":
+                    self.three()
+                elif top == "EL1":
+                    break
+                elif top == "OL_L":
+                    self.three()
+                elif top == "OL":
+                    break
+                elif len(self.stack) == 0:
+                    break
+            elif element == '&':
+                if top == ")":
+                    break
+                elif top == "P":
+                    break
+                elif top == "F_L":
+                    self.three()
+                elif top == "F":
+                    break
+                elif top == "T_L":
+                    self.three()
+                elif top == "T":
+                    break
+                elif top == "E_L":
+                    self.three()
+                elif top == "E":
+                    break
+                elif top == "OR":
+                    break
+                elif top == "ER_L":
+                    self.three()
+                elif top == "ER":
+                    break
+                elif top == "OL2_L":
+                    self.twelve()
+                elif top == "EL1":
+                    break
+                elif top == "OL_L":
+                    break
+                elif top == "OL":
+                    break
+                elif len(self.stack) == 0:
+                    break
+            elif element == '|':
+                if top == ")":
+                    break
+                elif top == "P":
+                    break
+                elif top == "F_L":
+                    self.three()
+                elif top == "F":
+                    break
+                elif top == "T_L":
+                    self.three()
+                elif top == "T":
+                    break
+                elif top == "E_L":
+                    self.three()
+                elif top == "E":
+                    break
+                elif top == "OR":
+                    break
+                elif top == "ER_L":
+                    self.three()
+                elif top == "ER":
+                    break
+                elif top == "OL2_L":
+                    self.three()
+                elif top == "EL1":
+                    break
+                elif top == "OL_L":
+                    self.ten()
+                elif top == "OL":
+                    break
+                elif len(self.stack) == 0:
+                    break
+            elif element == '<':
+                if top == ")":
+                    break
+                elif top == "P":
+                    break
+                elif top == "F_L":
+                    self.three()
+                elif top == "F":
+                    break
+                elif top == "T_L":
+                    self.three()
+                elif top == "T":
+                    break
+                elif top == "E_L":
+                    self.three()
+                elif top == "E":
+                    break
+                elif top == "OR":
+                    self.stack.pop()
+                elif top == "ER_L":
+                    self.fourteen()
+                elif top == "ER":
+                    break
+                elif top == "OL2_L":
+                    break
+                elif top == "EL1":
+                    break
+                elif top == "OL_L":
+                    break
+                elif top == "OL":
+                    break
+                elif len(self.stack) == 0:
+                    break
+            elif element == '>':
+                if top == ")":
+                    break
+                elif top == "P":
+                    break
+                elif top == "F_L":
+                    self.three()
+                elif top == "F":
+                    break
+                elif top == "T_L":
+                    self.three()
+                elif top == "T":
+                    break
+                elif top == "E_L":
+                    self.three()
+                elif top == "E":
+                    break
+                elif top == "OR":
+                    self.stack.pop()
+                elif top == "ER_L":
+                    self.fourteen()
+                elif top == "ER":
+                    break
+                elif top == "OL2_L":
+                    break
+                elif top == "EL1":
+                    break
+                elif top == "OL_L":
+                    break
+                elif top == "OL":
+                    break
+                elif len(self.stack) == 0:
+                    break
+            elif element == '<=':
+                if top == ")":
+                    break
+                elif top == "P":
+                    break
+                elif top == "F_L":
+                    self.three()
+                elif top == "F":
+                    break
+                elif top == "T_L":
+                    self.three()
+                elif top == "T":
+                    break
+                elif top == "E_L":
+                    self.three()
+                elif top == "E":
+                    break
+                elif top == "OR":
+                    self.stack.pop()
+                elif top == "ER_L":
+                    self.fourteen()
+                elif top == "ER":
+                    break
+                elif top == "OL2_L":
+                    break
+                elif top == "EL1":
+                    break
+                elif top == "OL_L":
+                    break
+                elif top == "OL":
+                    break
+                elif len(self.stack) == 0:
+                    break
+            elif element == '>=':
+                if top == ")":
+                    break
+                elif top == "P":
+                    break
+                elif top == "F_L":
+                    self.three()
+                elif top == "F":
+                    break
+                elif top == "T_L":
+                    self.three()
+                elif top == "T":
+                    break
+                elif top == "E_L":
+                    self.three()
+                elif top == "E":
+                    break
+                elif top == "OR":
+                    self.stack.pop()
+                elif top == "ER_L":
+                    self.fourteen()
+                elif top == "ER":
+                    break
+                elif top == "OL2_L":
+                    break
+                elif top == "EL1":
+                    break
+                elif top == "OL_L":
+                    break
+                elif top == "OL":
+                    break
+                elif len(self.stack) == 0:
+                    break
+            elif element == '!':
+                if top == ")":
+                    break
+                elif top == "P":
+                    break
+                elif top == "F_L":
+                    self.three()
+                elif top == "F":
+                    break
+                elif top == "T_L":
+                    self.three()
+                elif top == "T":
+                    break
+                elif top == "E_L":
+                    self.three()
+                elif top == "E":
+                    break
+                elif top == "OR":
+                    self.stack.pop()
+                elif top == "ER_L":
+                    self.fourteen()
+                elif top == "ER":
+                    break
+                elif top == "OL2_L":
+                    break
+                elif top == "EL1":
+                    break
+                elif top == "OL_L":
+                    break
+                elif top == "OL":
+                    break
+                elif len(self.stack) == 0:
+                    break
+            elif element == '=':
+                if top == ")":
+                    break
+                elif top == "P":
+                    break
+                elif top == "F_L":
+                    self.three()
+                elif top == "F":
+                    break
+                elif top == "T_L":
+                    self.three()
+                elif top == "T":
+                    break
+                elif top == "E_L":
+                    self.three()
+                elif top == "E":
+                    break
+                elif top == "OR":
+                    self.stack.pop()
+                elif top == "ER_L":
+                    self.fourteen()
+                elif top == "ER":
+                    break
+                elif top == "OL2_L":
+                    break
+                elif top == "EL1":
+                    break
+                elif top == "OL_L":
+                    break
+                elif top == "OL":
                     break
                 elif len(self.stack) == 0:
                     break
@@ -186,10 +562,24 @@ class syntaxAnalysis():
                     self.three()
                 elif top == "E":
                     break
+                elif top == "OR":
+                    break
+                elif top == "ER_L":
+                    self.three()
+                elif top == "ER":
+                    break
+                elif top == "OL2_L":
+                    self.three()
+                elif top == "EL1":
+                    break
+                elif top == "OL_L":
+                    self.three()
+                elif top == "OL":
+                    break
                 elif len(self.stack) == 0:
                     return "sequence Accepted!!!"
             self.i+=1
-        return "sequence Error!!! at: "+str(self.i)
+        return "Sequence Error!!! It was expected ' "+top+" ' and it arrived ' "+element+" ', at position: "+str(self.i)
             
     def one(self):
         self.stack.pop()
@@ -232,4 +622,38 @@ class syntaxAnalysis():
         self.stack.pop()
         self.stack.append(")")
         self.stack.append("E")
+
+    def nine(self):
+        self.stack.pop()
+        self.stack.append("OL_L")
+        self.stack.append("EL1")
+        self.i-=1
+    
+    def ten(self):
+        self.stack.pop()
+        self.stack.append("OL_L")
+        self.stack.append("EL1")
+    
+    def eleven(self):
+        self.stack.pop()
+        self.stack.append("OL2_L")
+        self.stack.append("ER")
+        self.i-=1
+    
+    def twelve(self):
+        self.stack.pop()
+        self.stack.append("OL2_L")
+        self.stack.append("ER")
+
+    def thirteen(self):
+        self.stack.pop()
+        self.stack.append("ER_L")
+        self.stack.append("E")
+        self.i-=1
+    
+    def fourteen(self):
+        self.stack.pop()
+        self.stack.append("E")
+        self.stack.append("OR")
+        self.i-=1
     
