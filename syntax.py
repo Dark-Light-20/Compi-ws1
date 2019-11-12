@@ -281,7 +281,7 @@ class syntaxAnalysis():
                     break
                 elif top == '':
                     break
-            elif element == '&':
+            elif element == '&&':
                 if top == ")":
                     break
                 elif top == "P":
@@ -314,7 +314,7 @@ class syntaxAnalysis():
                     break
                 elif top == '':
                     break
-            elif element == '|':
+            elif element == '||':
                 if top == ")":
                     break
                 elif top == "P":
@@ -512,7 +512,7 @@ class syntaxAnalysis():
                     break
                 elif top == '':
                     break
-            elif element == '=':
+            elif element == '==':
                 if top == ")":
                     break
                 elif top == "P":
@@ -623,7 +623,7 @@ class syntaxAnalysis():
     def eight(self):
         self.stack.pop()
         self.stack.append(")")
-        self.stack.append("E")
+        self.stack.append("OL")
 
     def nine(self):
         self.stack.pop()
@@ -673,13 +673,13 @@ class syntaxAnalysis():
             return "Syntax Error!!! identifier or opening parenthesis expected but ' "+element+" ' arrived at position: "+str(self.i)
 
         elif top == 'T_L':
-            return "Syntax Error!!! operators (+,-,*,/,&,|,<,>,=,<=,>=,!=,==), closing parenthesis or end of string expected but ' "+element+" ' arrived at position: "+str(self.i)
+            return "Syntax Error!!! operators (+,-,*,/,&&,||,<,>,=,<=,>=,!=,==), closing parenthesis or end of string expected but ' "+element+" ' arrived at position: "+str(self.i)
 
         elif top == 'T':
             return "Syntax Error!!! identifier or opening parenthesis expected but ' "+element+" ' arrived at position: "+str(self.i)
         
         elif top == 'E_L':
-            return "Syntax Error!!! operators (+,-,&,|,<,>,=,<=,>=,!=,==), closing parenthesis expected or end of string expected  but ' "+element+" ' arrived at position: "+str(self.i)
+            return "Syntax Error!!! operators (+,-,&&,||,<,>,=,<=,>=,!=,==), closing parenthesis expected or end of string expected  but ' "+element+" ' arrived at position: "+str(self.i)
 
         elif top == 'T':
             return "Syntax Error!!! identifier or opening parenthesis expected but ' "+element+" ' arrived at position: "+str(self.i)
@@ -700,7 +700,7 @@ class syntaxAnalysis():
             return "Syntax Error!!! identifier or opening parenthesis expected but ' "+element+" ' arrived at position: "+str(self.i)
 
         elif top == 'OL_L':
-            return "Syntax Error!!!  closing parenthesis, | operator or end of string expected but ' "+element+" ' arrived at position: "+str(self.i)  
+            return "Syntax Error!!!  closing parenthesis, || operator or end of string expected but ' "+element+" ' arrived at position: "+str(self.i)  
         
         elif top == 'OL':
             return "Syntax Error!!! identifier or opening parenthesis expected but ' "+element+" ' arrived at position: "+str(self.i)
