@@ -4,7 +4,7 @@ import productions
 class syntaxAnalysis():
     def __init__(self):
         self.stack = []
-        self.stack.append(productions.Production1("OL"))
+        self.stack.append("OL")
         self.i=0
 
     def loop(self, sequence):
@@ -684,7 +684,7 @@ class syntaxAnalysis():
         elif top == 'E_L':
             return "Syntax Error!!! operators (+,-,&&,||,<,>,=,<=,>=,!=,==), closing parenthesis expected or end of string expected  but ' "+element+" ' arrived at position: "+str(self.i)
 
-        elif top == 'T':
+        elif top == 'E':
             return "Syntax Error!!! identifier or opening parenthesis expected but ' "+element+" ' arrived at position: "+str(self.i)
 
         elif top == 'OR':
