@@ -1,3 +1,5 @@
+from lexic import I
+
 class syntaxAnalysis():
     def __init__(self):
         self.stack = []
@@ -18,12 +20,16 @@ class syntaxAnalysis():
             else:
                 top = ''
 
-            if element == 'I':
+            if validateTop():
+                continue
+
+            if isinstance(element, I):
                 if top == ")":
                     break
                 elif top == "P":
                     self.stack.pop()
-                    self.stack[self.stack[len(self.stack)-1]]='I'
+                    self.stack[self.stack[len(self.stack)-1]]=str(element.value)
+                    self.stack.pop()
                 elif top == "F_L":
                     break
                 elif top == "F":
@@ -66,7 +72,7 @@ class syntaxAnalysis():
                 elif top == "T":
                     break
                 elif top == "E_L":
-                    self.two()
+                    self.two(element)
                 elif top == "E":
                     break
                 elif top == "OR":
@@ -99,7 +105,7 @@ class syntaxAnalysis():
                 elif top == "T":
                     break
                 elif top == "E_L":
-                    self.two()
+                    self.two(element)
                 elif top == "E":
                     break
                 elif top == "OR":
@@ -128,7 +134,7 @@ class syntaxAnalysis():
                 elif top == "F":
                     break
                 elif top == "T_L":
-                    self.five()
+                    self.five(element)
                 elif top == "T":
                     break
                 elif top == "E_L":
@@ -161,7 +167,7 @@ class syntaxAnalysis():
                 elif top == "F":
                     break
                 elif top == "T_L":
-                    self.five()
+                    self.five(element)
                 elif top == "T":
                     break
                 elif top == "E_L":
@@ -593,12 +599,25 @@ class syntaxAnalysis():
         self.stack.append("T")
         self.i-=1
 
-    def two(self):
+    def two(self, element):
         self.stack.pop()
+        value = self.stack.pop()
+        self.stack.append('#')
         self.stack.append("E_L")
+        self.stack.append(len(self.stack)-2)
+        self.stack.append(value)
+        self.stack.append('#')
+        if element == '+':
+            self.stack.append('SUM')
+        else:
+            self.stack.append('RES')
+        self.stack.append(len(self.stack)-2)
         self.stack.append("T")
     
     def three(self):
+        self.stack.pop()
+        value = self.stack.pop()
+        self.stack[self.stack[len(self.stack)-1]]=value
         self.stack.pop()
         self.i-=1
 
@@ -610,9 +629,19 @@ class syntaxAnalysis():
         self.stack.append("F")
         self.i-=1
 
-    def five(self):
+    def five(self, element):
         self.stack.pop()
+        value = self.stack.pop()
+        self.stack.append('#')
         self.stack.append("T_L")
+        self.stack.append(len(self.stack)-2)
+        self.stack.append(value)
+        self.stack.append('#')
+        if element == '*':
+            self.stack.append('MUL')
+        else:
+            self.stack.append('DIV')
+        self.stack.append(len(self.stack)-2)
         self.stack.append("F")
     
     def six(self):
@@ -625,7 +654,14 @@ class syntaxAnalysis():
         
     def seven(self):
         self.stack.pop()
+        value = self.stack.pop()
+        self.stack.append('#')
         self.stack.append("F_L")
+        self.stack.append(len(self.stack)-2)
+        self.stack.append(value)
+        self.stack.append('#')
+        self.stack.append('POT')
+        self.stack.append(len(self.stack)-2)
         self.stack.append("P")
     
     def eight(self):
@@ -672,7 +708,14 @@ class syntaxAnalysis():
     
     def fourteen(self):
         self.stack.pop()
+        value = self.stack.pop()
+        self.stack.append('#')
+        self.stack.append(value)
+        self.stack.append('#')
+        self.stack.append('COMP')
+        self.stack.append(len(self.stack)-2)
         self.stack.append("E")
+        self.stack.append(len(self.stack)-6)
         self.stack.append("OR")
         self.i-=1
     
@@ -726,3 +769,34 @@ class syntaxAnalysis():
             return "Syntax Error!!! end of sequence expected but ' "+element+" ' arrived at position: "+str(self.i)
 
         #return "Syntax Error!!! It was expected ' "+top+" ' and it arrived ' "+element+" ', at position: "+str(self.i)
+
+    def validateTop(self):
+        operator = self.stack.pop()
+        value2 = self.stack.pop()
+        value1 = self.stack.pop()
+        
+        if operator == 'SUM':
+            value = int(value1) + int(value2)
+        elif operator == 'RES':
+            value = int(value1) - int(value2)
+        elif operator == 'MUL':
+            value = int(value1) * int(value2)
+        elif operator == 'DIV':
+            value = int(value1) / int(value2)
+        else:
+            return False
+
+        self.stack[self.stack[len(self.stack)-1]] = str(value)
+        self.stack.pop()
+        return True
+        
+        """
+        if self.stack[len(self.stack)-1] == 'MUL':
+            self.stack.pop()
+            value2 = self.stack.pop()
+            value1 = self.stack.pop()
+            value = int(value1) * int(value2)
+            self.stack[self.stack[len(self.stack)-1]] = str(value)
+            self.stack.pop()
+            return True
+        """

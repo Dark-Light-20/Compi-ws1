@@ -11,6 +11,6 @@ result=lexicAnalysis(expression)
 if result is not None:
     print(result)
     print("----------------")
-    analysis=syntaxAnalysis()
-    print(analysis.loop(result))
+    #analysis=syntaxAnalysis()
+    #print(analysis.loop(result))
     print("----------------")
