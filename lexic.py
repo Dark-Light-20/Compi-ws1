@@ -67,3 +67,7 @@ def lexicAnalysis(sequence):
 def error(pos, char):
     print("Lexic Error!!! Extrange Character found at "+str(pos)+": "+char)
     return None
+
+class I():
+    def __init__(self, value):
+        self.value = value

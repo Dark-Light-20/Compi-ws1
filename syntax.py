@@ -1,6 +1,7 @@
 class syntaxAnalysis():
     def __init__(self):
         self.stack = []
+        self.stack.append(0)
         self.stack.append("OL")
         self.i=0
 
@@ -22,6 +23,7 @@ class syntaxAnalysis():
                     break
                 elif top == "P":
                     self.stack.pop()
+                    self.stack[self.stack[len(self.stack)-1]]='I'
                 elif top == "F_L":
                     break
                 elif top == "F":
@@ -585,7 +587,9 @@ class syntaxAnalysis():
             
     def one(self):
         self.stack.pop()
+        self.stack.append('#')
         self.stack.append("E_L")
+        self.stack.append(len(self.stack)-2)
         self.stack.append("T")
         self.i-=1
 
@@ -600,7 +604,9 @@ class syntaxAnalysis():
 
     def four(self):
         self.stack.pop()
+        self.stack.append('#')
         self.stack.append("T_L")
+        self.stack.append(len(self.stack)-2)
         self.stack.append("F")
         self.i-=1
 
@@ -611,7 +617,9 @@ class syntaxAnalysis():
     
     def six(self):
         self.stack.pop()
+        self.stack.append('#')
         self.stack.append("F_L")
+        self.stack.append(len(self.stack)-2)
         self.stack.append("P")
         self.i-=1
         
@@ -627,7 +635,12 @@ class syntaxAnalysis():
 
     def nine(self):
         self.stack.pop()
+        self.stack[len(self.stack)-1]='#'
+        self.stack.append("RES")
+        self.stack.append(len(self.stack)-2)
+        self.stack.append('#')
         self.stack.append("OL_L")
+        self.stack.append(len(self.stack)-2)
         self.stack.append("EL1")
         self.i-=1
     
@@ -638,7 +651,9 @@ class syntaxAnalysis():
     
     def eleven(self):
         self.stack.pop()
+        self.stack.append('#')
         self.stack.append("OL2_L")
+        self.stack.append(len(self.stack)-2)
         self.stack.append("ER")
         self.i-=1
     
@@ -649,7 +664,9 @@ class syntaxAnalysis():
 
     def thirteen(self):
         self.stack.pop()
+        self.stack.append('#')
         self.stack.append("ER_L")
+        self.stack.append(len(self.stack)-2)
         self.stack.append("E")
         self.i-=1
     
