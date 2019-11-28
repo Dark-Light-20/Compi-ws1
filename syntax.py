@@ -533,7 +533,7 @@ class syntaxAnalysis():
                     break
                 elif top == '':
                     break
-            elif element == '=':
+            elif element == '==':
                 if top == ")":
                     break
                 elif top == "P":
