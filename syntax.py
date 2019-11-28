@@ -23,10 +23,13 @@ class syntaxAnalysis():
                 top = ''
 
             if top not in(productions):
-                result = self.validateTop()
-
-                if element == '$' and isinstance(result, str):
+                if element == '$' and top == '':
+                    print('----------')
+                    print(self.value)
+                    print('----------')        
                     return "Sequence Accepted!!!"
+
+                result = self.validateTop()
 
                 if result:
                     continue
@@ -267,8 +270,8 @@ class syntaxAnalysis():
             elif element == ')':
                 if top == ")":
                     self.stack.pop()
-                    value = self.stack.pop()
-                    self.stack[self.stack.pop()] = value
+                    self.value = self.stack.pop()
+                    self.stack[self.stack.pop()] = self.value
                 elif top == "P":
                     break
                 elif top == "F_L":
@@ -611,11 +614,11 @@ class syntaxAnalysis():
 
     def two(self, element):
         self.stack.pop()
-        value = self.stack.pop()
+        self.value = self.stack.pop()
         self.stack.append('#')
         self.stack.append("E_L")
         self.stack.append(len(self.stack)-2)
-        self.stack.append(value)
+        self.stack.append(self.value)
         self.stack.append('#')
         if element == '+':
             self.stack.append('SUM')
@@ -626,8 +629,8 @@ class syntaxAnalysis():
     
     def three(self):
         self.stack.pop()
-        value = self.stack.pop()
-        self.stack[self.stack[len(self.stack)-1]]=value
+        self.value = self.stack.pop()
+        self.stack[self.stack[len(self.stack)-1]] = self.value
         self.stack.pop()
         self.i-=1
 
@@ -641,11 +644,11 @@ class syntaxAnalysis():
 
     def five(self, element):
         self.stack.pop()
-        value = self.stack.pop()
+        self.value = self.stack.pop()
         self.stack.append('#')
         self.stack.append("T_L")
         self.stack.append(len(self.stack)-2)
-        self.stack.append(value)
+        self.stack.append(self.value)
         self.stack.append('#')
         if element == '*':
             self.stack.append('MUL')
@@ -664,17 +667,17 @@ class syntaxAnalysis():
         
     def seven(self):
         self.stack.pop()
-        value = self.stack.pop()
+        self.value = self.stack.pop()
         self.stack.append('#')
         self.stack.append("F_L")
         self.stack.append(len(self.stack)-2)
-        self.stack.append(value)
+        self.stack.append(self.value)
         self.stack.append('#')
         self.stack.append('POT')
         self.stack.append(len(self.stack)-2)
         self.stack.append("P")
     
-    def eight(self):    # trabajar
+    def eight(self):
         self.stack.pop()
         self.stack.append('#')
         self.stack.append(")")
@@ -683,9 +686,6 @@ class syntaxAnalysis():
 
     def nine(self):
         self.stack.pop()
-        self.stack[len(self.stack)-1]='#'
-        self.stack.append("RESULT")
-        self.stack.append(len(self.stack)-2)
         self.stack.append('#')
         self.stack.append("OL_L")
         self.stack.append(len(self.stack)-2)
@@ -694,11 +694,11 @@ class syntaxAnalysis():
     
     def ten(self):
         self.stack.pop()
-        value = self.stack.pop()
+        self.value = self.stack.pop()
         self.stack.append('#')
         self.stack.append("OL_L")
         self.stack.append(len(self.stack)-2)
-        self.stack.append(value)
+        self.stack.append(self.value)
         self.stack.append('#')
         self.stack.append('LOG|')
         self.stack.append(len(self.stack)-2)
@@ -714,11 +714,11 @@ class syntaxAnalysis():
     
     def twelve(self):
         self.stack.pop()
-        value = self.stack.pop()
+        self.value = self.stack.pop()
         self.stack.append('#')
         self.stack.append("OL2_L")
         self.stack.append(len(self.stack)-2)
-        self.stack.append(value)
+        self.stack.append(self.value)
         self.stack.append('#')
         self.stack.append('LOG&')
         self.stack.append(len(self.stack)-2)
@@ -734,9 +734,9 @@ class syntaxAnalysis():
     
     def fourteen(self):
         self.stack.pop()
-        value = self.stack.pop()
+        self.value = self.stack.pop()
         self.stack.append('#')
-        self.stack.append(value)
+        self.stack.append(self.value)
         self.stack.append('#')
         self.stack.append('COMP')
         self.stack.append(len(self.stack)-2)
@@ -806,53 +806,36 @@ class syntaxAnalysis():
 
     def validateTop(self):
         operator = self.stack.pop()
-        if operator == 'RESULT':
-            value = self.stack.pop()
-            print('----------')
-            print(value)
-            print('----------')
-            return value
         value2 = self.stack.pop()
         value1 = self.stack.pop()
 
         if operator == 'COMP':
             relationalop = self.stack.pop()
             if relationalop == '<':
-                value = value1<value2
+                self.value = value1<value2
             elif relationalop == '>':
-                value = value1>value2
+                self.value = value1>value2
             elif relationalop == '<=':
-                value = value1<=value2
+                self.value = value1<=value2
             elif relationalop == '>=':
-                value = value1>=value2
+                self.value = value1>=value2
             elif relationalop == '==':
-                value = value1 == value2
+                self.value = value1 == value2
             elif relationalop == '!=':
-                value = value1 != value2
+                self.value = value1 != value2
         elif operator == 'SUM':
-            value = int(value1) + int(value2)
+            self.value = int(value1) + int(value2)
         elif operator == 'RES':
-            value = int(value1) - int(value2)
+            self.value = int(value1) - int(value2)
         elif operator == 'MUL':
-            value = int(value1) * int(value2)
+            self.value = int(value1) * int(value2)
         elif operator == 'DIV':
-            value = int(value1) // int(value2)
+            self.value = int(value1) // int(value2)
         elif operator == 'LOG|':
-            value = value1 or value2
+            self.value = value1 or value2
         elif operator == 'LOG&':
-            value = value1 and value2
+            self.value = value1 and value2
 
-        self.stack[self.stack[len(self.stack)-1]] = str(value)
+        self.stack[self.stack[len(self.stack)-1]] = str(self.value)
         self.stack.pop()
         return True
-        
-        """
-        if self.stack[len(self.stack)-1] == 'MUL':
-            self.stack.pop()
-            value2 = self.stack.pop()
-            value1 = self.stack.pop()
-            value = int(value1) * int(value2)
-            self.stack[self.stack[len(self.stack)-1]] = str(value)
-            self.stack.pop()
-            return True
-        """
