@@ -1,5 +1,7 @@
 from lexic import I
 
+productions=[')','P','F_L','F','T_L','T','E_L','E','OR','ER_L','ER','OL2_L','EL1','OL_L','OL']
+
 class syntaxAnalysis():
     def __init__(self):
         self.stack = []
@@ -20,8 +22,14 @@ class syntaxAnalysis():
             else:
                 top = ''
 
-            if validateTop():
-                continue
+            if top not in(productions):
+                result = self.validateTop()
+
+                if element == '$' and isinstance(result, str):
+                    return "Sequence Accepted!!!"
+
+                if result:
+                    continue
 
             if isinstance(element, I):
                 if top == ")":
@@ -259,6 +267,8 @@ class syntaxAnalysis():
             elif element == ')':
                 if top == ")":
                     self.stack.pop()
+                    value = self.stack.pop()
+                    self.stack[self.stack.pop()] = value
                 elif top == "P":
                     break
                 elif top == "F_L":
@@ -373,7 +383,7 @@ class syntaxAnalysis():
                 elif top == "E":
                     break
                 elif top == "OR":
-                    self.stack.pop()
+                    self.fifteen(element)
                 elif top == "ER_L":
                     self.fourteen()
                 elif top == "ER":
@@ -406,7 +416,7 @@ class syntaxAnalysis():
                 elif top == "E":
                     break
                 elif top == "OR":
-                    self.stack.pop()
+                    self.fifteen(element)
                 elif top == "ER_L":
                     self.fourteen()
                 elif top == "ER":
@@ -439,7 +449,7 @@ class syntaxAnalysis():
                 elif top == "E":
                     break
                 elif top == "OR":
-                    self.stack.pop()
+                    self.fifteen(element)
                 elif top == "ER_L":
                     self.fourteen()
                 elif top == "ER":
@@ -472,7 +482,7 @@ class syntaxAnalysis():
                 elif top == "E":
                     break
                 elif top == "OR":
-                    self.stack.pop()
+                    self.fifteen(element)
                 elif top == "ER_L":
                     self.fourteen()
                 elif top == "ER":
@@ -505,7 +515,7 @@ class syntaxAnalysis():
                 elif top == "E":
                     break
                 elif top == "OR":
-                    self.stack.pop()
+                    self.fifteen(element)
                 elif top == "ER_L":
                     self.fourteen()
                 elif top == "ER":
@@ -538,7 +548,7 @@ class syntaxAnalysis():
                 elif top == "E":
                     break
                 elif top == "OR":
-                    self.stack.pop()
+                    self.fifteen(element)
                 elif top == "ER_L":
                     self.fourteen()
                 elif top == "ER":
@@ -664,15 +674,17 @@ class syntaxAnalysis():
         self.stack.append(len(self.stack)-2)
         self.stack.append("P")
     
-    def eight(self):
+    def eight(self):    # trabajar
         self.stack.pop()
+        self.stack.append('#')
         self.stack.append(")")
+        self.stack.append(len(self.stack)-2)
         self.stack.append("OL")
 
     def nine(self):
         self.stack.pop()
         self.stack[len(self.stack)-1]='#'
-        self.stack.append("RES")
+        self.stack.append("RESULT")
         self.stack.append(len(self.stack)-2)
         self.stack.append('#')
         self.stack.append("OL_L")
@@ -682,7 +694,14 @@ class syntaxAnalysis():
     
     def ten(self):
         self.stack.pop()
+        value = self.stack.pop()
+        self.stack.append('#')
         self.stack.append("OL_L")
+        self.stack.append(len(self.stack)-2)
+        self.stack.append(value)
+        self.stack.append('#')
+        self.stack.append('LOG|')
+        self.stack.append(len(self.stack)-2)
         self.stack.append("EL1")
     
     def eleven(self):
@@ -695,7 +714,14 @@ class syntaxAnalysis():
     
     def twelve(self):
         self.stack.pop()
+        value = self.stack.pop()
+        self.stack.append('#')
         self.stack.append("OL2_L")
+        self.stack.append(len(self.stack)-2)
+        self.stack.append(value)
+        self.stack.append('#')
+        self.stack.append('LOG&')
+        self.stack.append(len(self.stack)-2)
         self.stack.append("ER")
 
     def thirteen(self):
@@ -718,6 +744,14 @@ class syntaxAnalysis():
         self.stack.append(len(self.stack)-6)
         self.stack.append("OR")
         self.i-=1
+
+    def fifteen(self, element):
+        self.stack.pop()
+        if isinstance(element, I):
+            self.stack[self.stack[len(self.stack)-1]]=str(element.value)
+        else:
+            self.stack[self.stack[len(self.stack)-1]]=str(element)
+        self.stack.pop()
     
     def error(self, top, element):
         if top == ')':
@@ -772,19 +806,41 @@ class syntaxAnalysis():
 
     def validateTop(self):
         operator = self.stack.pop()
+        if operator == 'RESULT':
+            value = self.stack.pop()
+            print('----------')
+            print(value)
+            print('----------')
+            return value
         value2 = self.stack.pop()
         value1 = self.stack.pop()
-        
-        if operator == 'SUM':
+
+        if operator == 'COMP':
+            relationalop = self.stack.pop()
+            if relationalop == '<':
+                value = value1<value2
+            elif relationalop == '>':
+                value = value1>value2
+            elif relationalop == '<=':
+                value = value1<=value2
+            elif relationalop == '>=':
+                value = value1>=value2
+            elif relationalop == '==':
+                value = value1 == value2
+            elif relationalop == '!=':
+                value = value1 != value2
+        elif operator == 'SUM':
             value = int(value1) + int(value2)
         elif operator == 'RES':
             value = int(value1) - int(value2)
         elif operator == 'MUL':
             value = int(value1) * int(value2)
         elif operator == 'DIV':
-            value = int(value1) / int(value2)
-        else:
-            return False
+            value = int(value1) // int(value2)
+        elif operator == 'LOG|':
+            value = value1 or value2
+        elif operator == 'LOG&':
+            value = value1 and value2
 
         self.stack[self.stack[len(self.stack)-1]] = str(value)
         self.stack.pop()
