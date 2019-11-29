@@ -1,4 +1,5 @@
 from lexic import I
+from math import pow
 
 productions=[')','P','F_L','F','T_L','T','E_L','E','OR','ER_L','ER','OL2_L','EL1','OL_L','OL']
 
@@ -831,6 +832,8 @@ class syntaxAnalysis():
             self.value = int(value1) * int(value2)
         elif operator == 'DIV':
             self.value = int(value1) // int(value2)
+        elif operator == 'POT':
+            self.value = int(pow(int(value1),int(value2)))
         elif operator == 'LOG|':
             self.value = value1 or value2
         elif operator == 'LOG&':
