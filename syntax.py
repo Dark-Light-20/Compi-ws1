@@ -12,10 +12,6 @@ class syntaxAnalysis():
 
     def loop(self, sequence):
         while(self.i<len(sequence)):
-            """
-            it must be another way fck XD
-            """
-
             element = sequence[self.i]
 
             if len(self.stack) > 0:
@@ -26,9 +22,9 @@ class syntaxAnalysis():
             if top not in(productions):
                 if element == '$' and top == '':
                     print('----------')
-                    print(self.value)
-                    print('----------')        
-                    return "Sequence Accepted!!!"
+                    print("Result= "+str(self.value))
+                    print('----------')
+                    return
 
                 result = self.validateTop()
 
@@ -825,15 +821,15 @@ class syntaxAnalysis():
             elif relationalop == '!=':
                 self.value = value1 != value2
         elif operator == 'SUM':
-            self.value = int(value1) + int(value2)
+            self.value = float(value1) + float(value2)
         elif operator == 'RES':
-            self.value = int(value1) - int(value2)
+            self.value = float(value1) - float(value2)
         elif operator == 'MUL':
-            self.value = int(value1) * int(value2)
+            self.value = float(value1) * float(value2)
         elif operator == 'DIV':
-            self.value = int(value1) // int(value2)
+            self.value = float(value1) / float(value2)
         elif operator == 'POT':
-            self.value = int(pow(int(value1),int(value2)))
+            self.value = pow(float(value1),float(value2))
         elif operator == 'LOG|':
             self.value = value1 or value2
         elif operator == 'LOG&':
